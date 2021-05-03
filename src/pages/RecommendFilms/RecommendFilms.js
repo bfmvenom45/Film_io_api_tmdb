@@ -1,5 +1,4 @@
-import { Card, CardActionArea, CardContent, Chip, CircularProgress, Grid, List, Typography } from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
+import {  CircularProgress, Grid, } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import FilmCard from 'src/components/FilmCard';
@@ -30,7 +29,6 @@ const RecommendFilms = () => {
     fetchData();
   }, [params]);
 
-  console.log("FILMIERECOMMENDS", recommend);
 
 
 

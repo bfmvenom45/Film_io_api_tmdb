@@ -9,8 +9,6 @@ import { Pagination } from '@material-ui/lab';
 
 
 const Popular = () => {
-	// const fetchService = new FetchService();
-	// eslint-disable-next-line no-undef
 	const [films, setFilms] = useState([]);
 	const [hasError, setErrors] = useState(false);
 	const [loading, setLoading] = useState(true);
@@ -42,8 +40,7 @@ const Popular = () => {
 		setPage(newPage)
 	}
 
-	console.log('PAGE:', page);
-	console.log('RES:', responce);
+
 	return (
 		<div>
 			{loading ? <CircularProgress /> : (
