@@ -11,24 +11,21 @@ import { Pagination } from '@material-ui/lab';
 const Popular = () => {
 	// const fetchService = new FetchService();
 	// eslint-disable-next-line no-undef
-	const params = useParams();
 	const [films, setFilms] = useState([]);
 	const [hasError, setErrors] = useState(false);
 	const [loading, setLoading] = useState(true);
-	const [next, setNext] = useState(1);
-
+	const [page, setPage] = useState(1);
+	const [responce, setResponce] = useState({});
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=b96993fb25220304f950b534ddafb551&language=ru-RU&page=${next}`);
+			const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=b96993fb25220304f950b534ddafb551&language=ru-RU&page=${page}`);
 			res
 				.json()
 				.then(res => {
 					setFilms(res.results);
+					setResponce(res);
 					setLoading(false);
-				})
-				.then((json) => {
-					 setNext(json);
 				})
 				.catch(err => {
 					setErrors(err);
@@ -39,26 +36,25 @@ const Popular = () => {
 		}
 
 		fetchData();
-	}, []);
+	}, [page]);
 
-	// function nextPage() {
-	// 	setNext({
-	// 		next: setNext(next + 1)
-	// 	});
-	// }
+	const pageHandler = (e, newPage) => {
+		setPage(newPage)
+	}
 
-	console.log("NEXT:", next);
+	console.log('PAGE:', page);
+	console.log('RES:', responce);
 	return (
 		<div>
 			{loading ? <CircularProgress /> : (
 				<Grid container spacing={2}>
 					{films.map(film => (
-						<Grid item xs={3} key={film.id}  style={{height: '100%'}}>
-							<Card style={{height: '100%'}}>
+						<Grid item xs={3} key={film.id} style={{ height: '100%' }}>
+							<Card style={{ height: '100%' }}>
 								<CardActionArea>
 									<CardContent component={Link} to={`/app/film/${film.id}`}>
-										<img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}  style={{maxWidth: '100%'}}/>
-										<Typography variant='body1' >{film.title}</Typography>
+										<img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} style={{ maxWidth: '100%' }} />
+										<Typography variant="body1">{film.title}</Typography>
 
 									</CardContent>
 								</CardActionArea>
@@ -68,11 +64,17 @@ const Popular = () => {
 					))}
 				</Grid>
 
-			) }
-						<div>
-							<Pagination  count={10} size="large" onClick={() => setNext(next +1)}/>
-
-						</div>
+			)}
+			<div>
+				{ responce && !loading &&
+				(	<Pagination
+					page={responce.page}
+					count={responce.total_pages}
+					size="large"
+					onChange={pageHandler}
+				/> )
+				}
+			</div>
 		</div>
 	);
 };

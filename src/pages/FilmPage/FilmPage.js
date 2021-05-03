@@ -1,6 +1,7 @@
 import {  Chip, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import RecommendFilms from 'src/pages/RecommendFilms';
 
 const FilmPage = () => {
   const params = useParams();
@@ -15,7 +16,7 @@ const FilmPage = () => {
         setDetails(data);
         setLoading(false);
       });
-  }, []);
+  }, [params]);
 
 
 
@@ -45,6 +46,7 @@ const FilmPage = () => {
               </div>
             )
           }
+          <RecommendFilms/>
         </div>
     );
 };
