@@ -1,6 +1,5 @@
 import React from "react";
 import {Container, CssBaseline, MuiThemeProvider} from "@material-ui/core";
-import SearchBar from 'src/pages/SearchBar';
 import {theme} from "src/theme/theme";
 import Navbar from "src/components/Navbar";
 import Sidebar from "src/components/Sidebar";
@@ -17,7 +16,6 @@ function App() {
                     <CssBaseline/>
                     <Navbar/>
                     <Sidebar/>
-                    <SearchBar/>
                     <Container maxWidth='lg'>
                         <Main/>
                     </Container>

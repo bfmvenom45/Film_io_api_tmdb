@@ -1,45 +1,56 @@
-import { TextField } from '@material-ui/core';
+import {  CircularProgress, Grid, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import FilmCard from 'src/components/FilmCard';
 
 const SearchBar = () => {
-  // const [searchItem, setSearchItem] = useState("");
-  const params = useParams();
-  const [hasError, setErrors] = useState(false);
+
+
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [responce, setResponce] = useState({});
+
 
 
   useEffect(() => {
-    async function fetchSearch() {
-      const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=b96993fb25220304f950b534ddafb551&language=en-US&query=${search.split(' ').join("+")}&page=1`
-      );
-       res
-         .json()
-        .then(res => {
-          setSearch(res);
-          setLoading(false);
-        })
-        .catch(err => {
-          setErrors(err);
-          setLoading(false);
-        });
-    }
-      fetchSearch();
-  }, []);
-
-  const searchHandler = (event) => {
-    setSearch(event.target.value)
+      async function fetchSearch() {
+         await fetch(`https://api.themoviedb.org/3/search/movie?api_key=b96993fb25220304f950b534ddafb551&language=en-US&query=${search.split(' ').join("+")}&page=1`)
+           .then(data => data.json())
+          .then(data => {
+            const result = data.results;
+            setResponce(result)
+            setLoading(false);
+          })
+      }
+  if (search) {
+    fetchSearch();
   }
+  }, [search]);
 
-console.log("SEARCH", setSearch)
+const searchHandler = (event) => {
+  setSearch(event.target.value);
+}
+const LoadingComponent = <CircularProgress/>;
+const EnterSearch = <h2>Введите название для поиска </h2>;
+const NothingFound = <h2>Ничего не найдено</h2>;
+
   return (
+
     <div>
       <TextField
         placeholder="Search"
         value={search}
         onChange={searchHandler}
       />
+      {loading ? LoadingComponent : !search ? EnterSearch  : !responce.length > false ?  NothingFound  :  (
+        <Grid container spacing={2}>
+          {responce.map(film => (
+            <Grid item xs={3} key={film.id}  style={{height: '100%'}}>
+              <FilmCard film={film} />
+            </Grid>
+          ))}
+        </Grid>
+
+      ) }
 
     </div>
   );
