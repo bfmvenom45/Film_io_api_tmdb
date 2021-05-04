@@ -1,4 +1,4 @@
-import {  CircularProgress, Grid, TextField } from '@material-ui/core';
+import {  CircularProgress, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import FilmCard from 'src/components/FilmCard';
 
