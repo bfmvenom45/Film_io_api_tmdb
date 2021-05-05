@@ -1,5 +1,7 @@
+import { Container } from '@material-ui/core';
 import React from 'react';
 import {Switch, Route, Redirect} from "react-router-dom";
+import FilmList from 'src/components/FilmList';
 import Home from "src/pages/Home";
 import Popular from "src/pages/Popular";
 import FilmPage from "src/pages/FilmPage";
@@ -8,10 +10,28 @@ import SearchBar from 'src/pages/SearchBar';
 const Main = () => {
     return (
         <Switch>
-            <Route path='/app/home' component={Home}/>
-            <Route path='/app/popular' component={Popular}/>
+            <Route path='/app/home'>
+              <Container maxWidth='lg'>
+                <Home/>
+              </Container>
+            </Route>
+          <Route path='/app/popular' >
+            <Container maxWidth='lg'>
+              <Popular/>
+            </Container>
+          </Route>
             <Route path='/app/film/:id' component={FilmPage}/>
-            <Route path='/app/search/' component={SearchBar}/>
+          <Route path='/app/search/' >
+            <Container maxWidth='lg'>
+            <SearchBar/>
+          </Container>
+          </Route>
+          <Route path='/app/list/' >
+            <Container maxWidth='lg'>
+              <FilmList/>
+            </Container>
+          </Route>
+
             <Redirect to={'/app/home'}/>
 
         </Switch>

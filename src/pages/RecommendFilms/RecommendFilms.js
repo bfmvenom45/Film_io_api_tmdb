@@ -1,9 +1,12 @@
-import {  CircularProgress, Grid, } from '@material-ui/core';
+import { Box, CircularProgress, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import FilmCard from 'src/components/FilmCard';
 
+
 const RecommendFilms = () => {
+
   const params = useParams();
   const [recommend, setRecommend] = useState({});
   const [hasError, setErrors] = useState(false);
@@ -33,18 +36,18 @@ const RecommendFilms = () => {
 
 
   return (
-    <div>
+    <Box my={6}>
       {loading ? <CircularProgress /> : (
         <Grid container spacing={2}>
           {recommend.map(film => (
-            <Grid item xs={3} key={film.id}  style={{height: '100%'}}>
+            <Grid item xs={3} key={film.id}  >
              <FilmCard film={film}/>
             </Grid>
           ))}
         </Grid>
 
       ) }
-    </div>
+    </Box>
   )
 };
 

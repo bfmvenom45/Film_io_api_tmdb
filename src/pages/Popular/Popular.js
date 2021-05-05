@@ -4,7 +4,9 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Pagination } from '@material-ui/lab';
-
+import { findIndex } from 'lodash';
+import FilmCard from 'src/components/FilmCard';
+import  getGenreName from 'src/services/genresService';
 // import FetchService from 'src/services/fetchService';
 
 
@@ -36,31 +38,24 @@ const Popular = () => {
 		fetchData();
 	}, [page]);
 
+
+console.log('GENRE',  getGenreName(16));
+
+
 	const pageHandler = (e, newPage) => {
 		setPage(newPage)
 	}
-
 
 	return (
 		<div>
 			{loading ? <CircularProgress /> : (
 				<Grid container spacing={2}>
 					{films.map(film => (
-						<Grid item xs={3} key={film.id} style={{ height: '100%' }}>
-							<Card style={{ height: '100%' }}>
-								<CardActionArea>
-									<CardContent component={Link} to={`/app/film/${film.id}`}>
-										<img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} style={{ maxWidth: '100%' }} />
-										<Typography variant="body1">{film.title}</Typography>
-
-									</CardContent>
-								</CardActionArea>
-
-							</Card>
+						<Grid item xs={3} key={film.id} >
+							<FilmCard film={film}/>
 						</Grid>
 					))}
 				</Grid>
-
 			)}
 			<div>
 				{ responce && !loading &&
