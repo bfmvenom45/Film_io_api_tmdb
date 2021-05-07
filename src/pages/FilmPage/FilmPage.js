@@ -7,10 +7,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CalendarIcon, ClockIcon, CursorClickIcon, FireIcon, TagIcon } from 'src/Icons';
 import RecommendFilms from 'src/pages/RecommendFilms';
-import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
-import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
-import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined';
-import MouseOutlinedIcon from '@material-ui/icons/MouseOutlined';
 import noise from './noise.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -118,7 +114,7 @@ const FilmPage = () => {
 							<div className={classes.backdrop2} />
 							<Container maxWidth={'lg'} className={classes.container}>
 								<Grid container spacing={5}>
-									<Grid item xs={3} className={classes.left}>
+									<Grid item  xs={12} sm={3} className={classes.left}>
 										<Box className={classes.boxBlur}>
 											<img className={classes.cover} src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`}
 											     style={{ maxWidth: '100%' }} />
