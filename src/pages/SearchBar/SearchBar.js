@@ -73,7 +73,7 @@ const SearchBar = () => {
 							label={'Поиск по названию фильма'}
 							fullWidth
 							variant={'filled'}
-							placeholder="Search"
+							placeholder="Поиск..."
 							value={search}
 							onChange={searchHandler}
 						/>

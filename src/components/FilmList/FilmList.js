@@ -1,11 +1,17 @@
 import {
-  Avatar, Card, CardActionArea, CardContent, Checkbox, List, ListItem, ListItemAvatar, ListItemSecondaryAction,
+  Avatar, Card, CardActionArea, CardContent, Checkbox, CircularProgress, Grid, List, ListItem, ListItemAvatar,
+  ListItemSecondaryAction,
   ListItemText,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import { find } from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { GlobalContext } from 'src/components/Context/GlobalContext';
+import FilmCard from 'src/components/FilmCard';
+import getItemId from 'src/services/testService';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,78 +22,110 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FilmList = ({details}) => {
-  const params = useParams();
-
-
+const FilmList = () => {
+  const params = useParams(FilmCard);
+  const {like} = useContext(GlobalContext);
+  const [state] = useState(like);
 
   const classes = useStyles();
   const [checked, setChecked] = useState([1]);
+  const [loading, setLoading] = useState(true);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
 
-    setChecked(newChecked);
-  };
-  console.log(details)
+  // const handleToggle = (like) => () => {
+  //   const currentIndex = checked.indexOf(like);
+  //   const newChecked = [...checked];
+  //
+  //   if (currentIndex === -1) {
+  //     newChecked.push(like);
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //   }
+  //
+  //   setChecked(newChecked);
+  // };
+
+  // function  getItemId(type) {
+  //   const index = findIndex(like,  function(obj) {
+  //     return obj.type === type;
+  //   })
+  //   if (index !== -1) {
+  //     return like[index]["movie"];
+  //   }
+  // }
+  // const listItems = find(state, function(item) {
+  //   if (item.type === 'like') {
+  //     return item.movie
+  //   }
+  // });
+    // state.map((item) => <FilmCard film={item} />;
+  // console.log('LIKE:', listItems)
+
+  // console.log("NAME", getItemId('like'));
+  // console.log("USE", setState);
+  // console.log("USE", object);
+
+  console.log("LIST", state);
   return (
-    <List   dense className={classes.root}>
-          <ListItem  button>
-            <ListItemAvatar  >
-              <Avatar
-              src={`https://image.tmdb.org/t/p/w500/${details}`}  style={{maxWidth: '100%'}}
-              />
-            </ListItemAvatar>
-            <ListItemText primary={`Line item ${details}`} />
-            <ListItemSecondaryAction>
-              <Checkbox
-                edge="end"
-                onChange={handleToggle(details)}
-                checked={checked.indexOf(details) !== -1}
-                inputProps={'aria-labelledby'}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
+    <div     >
+
+        <Grid container spacing={2}>
+            <Grid item xs={3}  >
+              <div >
+                <div >
+                  <h1 >My Watchlist</h1>
+
+                  <span >
+            {like.length} {like.length === 1 ? "Movie" : "Movies"}
+          </span>
+                </div>
+
+                {like.length > 0 ? (
+                  <div >
+                    { <FilmCard  film={`${ like.movie }${like.type}`} />
+                    }
+                  </div>
+                ) : (
+                  <h2 >No movies in your list! Add some!</h2>
+                )}
+              </div>
+            </Grid>
+        </Grid>
 
 
-    </List>
+      {/*<div >*/}
+      {/*  <div >*/}
+      {/*    <div >*/}
+      {/*      <h1 >My Watchlist</h1>*/}
+
+      {/*      <span >*/}
+      {/*      {state.length} {state.length === 1 ? "Movie" : "Movies"}*/}
+      {/*    </span>*/}
+      {/*    </div>*/}
+
+      {/*    {state.length > 0 ? (*/}
+      {/*      <div >*/}
+      {/*        { <FilmCard  film={`${like.find(item => item.movie)} `} />*/}
+      {/*        }*/}
+      {/*      </div>*/}
+      {/*    ) : (*/}
+      {/*      <h2 >No movies in your list! Add some!</h2>*/}
+      {/*    )}*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+
+    </div>
 
 
   );
 };
 
 export default FilmList;
-//
-// import React, { useState, useEffect } from "react";
-//
-// function useCounter() {
-//   const initialState = () =>
-//     Number(window.localStorage.getItem("count") || null);
-//   const [count, setCount] = useState(initialState);
-//
-//   const increment = () => setCount(count + 1);
-//   const decrement = () => setCount(count - 1);
-//
-//   useEffect(() => window.localStorage.setItem("count", count), [count]);
-//
-//   return { count, increment, decrement };
-// }
-//
-// export default function Counter() {
-//   const { count, increment, decrement } = useCounter(5, 2);
-//
-//   return (
-//     <div>
-//       <div className="counter">{count}</div>
-//       <button onClick={increment}>+</button>
-//       <button onClick={decrement}>-</button>
-//     </div>
-//   );
-// }
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 import React from "react";
 import { CssBaseline, MuiThemeProvider} from "@material-ui/core";
+import { GlobalProvider } from 'src/components/Context/GlobalContext';
 import {theme} from "src/theme/theme";
 import Navbar from "src/components/Navbar";
 import ErrorBoundary from "src/components/ErrorBoundaries";
@@ -8,17 +9,19 @@ import {BrowserRouter as Router} from 'react-router-dom';
 
 function App() {
     return (
+<GlobalProvider>
+  <Router >
+    <MuiThemeProvider theme={theme}>
+      <ErrorBoundary>
+        <CssBaseline/>
+        <Navbar/>
 
-    <Router >
-      <MuiThemeProvider theme={theme}>
-        <ErrorBoundary>
-          <CssBaseline/>
-          <Navbar/>
+        <Main/>
+      </ErrorBoundary>
+    </MuiThemeProvider>
+  </Router>
+</GlobalProvider>
 
-          <Main/>
-        </ErrorBoundary>
-      </MuiThemeProvider>
-    </Router>
 
     );
 }

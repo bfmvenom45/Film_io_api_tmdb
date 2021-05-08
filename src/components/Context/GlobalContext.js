@@ -1,12 +1,10 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import AppReducer from "./AppReducer";
 // initial state
-
 const initialState = {
-	likelist: localStorage.getItem("likelist")
-		? JSON.parse(localStorage.getItem("likelist"))
-		: [],
-
+	like: localStorage.getItem("like")
+		? JSON.parse(localStorage.getItem("like"))
+		: []
 };
 
 // create context
@@ -17,22 +15,22 @@ export const GlobalProvider = (props) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
 
 	useEffect(() => {
-		localStorage.setItem("likelist", JSON.stringify(state.likelist));
+		localStorage.setItem("like", JSON.stringify(state.like));
 	}, [state]);
 
 	// actions
-	const addMovieTolikelist = (movie) => {
-		dispatch({ type: "ADD_MOVIE_TO_LIKELIST", payload: movie });
+	const addMovieToLike = (movie) => {
+		dispatch({ type: "ADD_MOVIE_TO_LIKE", payload: movie });
 	};
 
-	const removeMovieFromlikelist = (id) => {
-		dispatch({ type: "REMOVE_MOVIE_FROM_LIKELIST", payload: id });
+	const removeMovieFromLike = (id) => {
+		dispatch({ type: "REMOVE_MOVIE_FROM_LIKE", payload: id });
 	};
 
 
 
-	const moveTolikelist = (movie) => {
-		dispatch({ type: "MOVE_TO_LIKELIST", payload: movie });
+	const moveToLike = (movie) => {
+		dispatch({ type: "MOVE_TO_LIKE", payload: movie });
 	};
 
 
@@ -40,10 +38,10 @@ export const GlobalProvider = (props) => {
 	return (
 		<GlobalContext.Provider
 			value={{
-				likelist: state.likelist,
-				addMovieTolikelist,
-				removeMovieFromlikelist,
-				moveTolikelist,
+				like: state.like,
+				addMovieToLike,
+				removeMovieFromLike,
+				moveToLike,
 			}}
 		>
 			{props.children}

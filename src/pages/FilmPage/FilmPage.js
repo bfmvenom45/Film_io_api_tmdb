@@ -90,6 +90,7 @@ const FilmPage = () => {
 	const params = useParams();
 	const [details, setDetails] = useState({});
 	const [loading, setLoading] = useState(true);
+
 	useEffect(() => {
 		fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=b96993fb25220304f950b534ddafb551&language=ru-RU`)
 			.then((res) => {

@@ -28,9 +28,9 @@ const Main = () => {
             <SearchBar/>
           </Container>
           </Route>
-          <Route path='/app/list/' >
+          <Route path='/app/list/'  >
             <Container maxWidth='lg'>
-              <FilmList />
+              <FilmList component={FilmPage} />
             </Container>
           </Route>
 

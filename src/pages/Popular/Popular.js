@@ -1,7 +1,7 @@
 import {
 	Avatar, Button, Card, CardActionArea, CardContent, CardMedia, Chip, CircularProgress, Grid, Typography,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Pagination } from '@material-ui/lab';
 import { findIndex } from 'lodash';
@@ -11,6 +11,7 @@ import  getGenreName from 'src/services/genresService';
 
 
 const Popular = () => {
+
 	const [films, setFilms] = useState([]);
 	const [hasError, setErrors] = useState(false);
 	const [loading, setLoading] = useState(true);
@@ -38,8 +39,6 @@ const Popular = () => {
 		fetchData();
 	}, [page]);
 
-
-console.log('GENRE',  getGenreName(16));
 
 
 	const pageHandler = (e, newPage) => {

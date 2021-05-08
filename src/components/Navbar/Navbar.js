@@ -115,6 +115,7 @@ export default function Navbar() {
                     <div>
                         <Button component={Link} to='/app/popular' color={'primary'} variant={'contained'}>Популярные</Button>
                         <Button component={Link} to='/app/list' color={'primary'} variant={'contained'}>Избранные</Button>
+                        <Button component={Link} to='/app/search' color={'primary'} variant={'contained'}>Поиск</Button>
                     </div>
 
 
