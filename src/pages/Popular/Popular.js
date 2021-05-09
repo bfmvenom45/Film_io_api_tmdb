@@ -39,6 +39,7 @@ const Popular = () => {
 		fetchData();
 	}, [page]);
 
+console.log('GENRE',  getGenreName(16));
 
 
 	const pageHandler = (e, newPage) => {

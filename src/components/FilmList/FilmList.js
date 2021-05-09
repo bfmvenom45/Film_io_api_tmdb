@@ -1,124 +1,80 @@
 import {
-  Avatar, Card, CardActionArea, CardContent, Checkbox, CircularProgress, Grid, List, ListItem, ListItemAvatar,
+  Avatar, Button, Card, CardActionArea, CardContent, Checkbox, CircularProgress, Grid, List, ListItem, ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { find } from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useContext,  useState } from 'react';
 import { GlobalContext } from 'src/components/Context/GlobalContext';
 import FilmCard from 'src/components/FilmCard';
-import getItemId from 'src/services/testService';
+
 
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  avatar: {
+    borderRadius: 12,
     width: '100%',
-    maxWidth: 1920,
-    backgroundColor: theme.palette.background.paper,
+    maxWidth: '100%',
+    height: 400,
+    marginBottom: '2rem',
   },
+  card: {
+    position: 'relative',
+    height: '100%',
+    boxShadow: 'none',
+    textAlign: 'center',
+    transition: '0.1s cubic-bezier(.17,.67,.83,.67)',
+    '&:hover': {
+      boxShadow: '0px 14px 74px -20px rgba(51, 65, 85, 0.49)',
+      zIndex: 10,
+    },
+
+
+  },
+
 }));
 
 const FilmList = () => {
-  const params = useParams(FilmCard);
   const {like} = useContext(GlobalContext);
-  const [state] = useState(like);
 
   const classes = useStyles();
-  const [checked, setChecked] = useState([1]);
-  const [loading, setLoading] = useState(true);
 
+  const {
+    addMovieToLike,
+    removeMovieFromLike,
+  } = useContext(GlobalContext);
 
+  console.log("USE", like);
 
-  // const handleToggle = (like) => () => {
-  //   const currentIndex = checked.indexOf(like);
-  //   const newChecked = [...checked];
-  //
-  //   if (currentIndex === -1) {
-  //     newChecked.push(like);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //
-  //   setChecked(newChecked);
-  // };
+  const likeMovie = like.map(id => id.movie);
 
-  // function  getItemId(type) {
-  //   const index = findIndex(like,  function(obj) {
-  //     return obj.type === type;
-  //   })
-  //   if (index !== -1) {
-  //     return like[index]["movie"];
-  //   }
-  // }
-  // const listItems = find(state, function(item) {
-  //   if (item.type === 'like') {
-  //     return item.movie
-  //   }
-  // });
-    // state.map((item) => <FilmCard film={item} />;
-  // console.log('LIKE:', listItems)
-
-  // console.log("NAME", getItemId('like'));
-  // console.log("USE", setState);
-  // console.log("USE", object);
-
-  console.log("LIST", state);
+  // console.log("LIKEMOVIE", likeMovie);
   return (
     <div     >
-
-        <Grid container spacing={2}>
-            <Grid item xs={3}  >
-              <div >
-                <div >
-                  <h1 >My Watchlist</h1>
-
-                  <span >
-            {like.length} {like.length === 1 ? "Movie" : "Movies"}
+      <div >
+        <div >
+          <h1 >My Watchlist</h1>
+          <span >
+            {likeMovie.length} {likeMovie.length === 0 ? "Movie" : "Movies"}
           </span>
-                </div>
-
-                {like.length > 0 ? (
-                  <div >
-                    { <FilmCard  film={`${ like.movie }${like.type}`} />
-                    }
-                  </div>
-                ) : (
-                  <h2 >No movies in your list! Add some!</h2>
-                )}
-              </div>
-            </Grid>
-        </Grid>
-
-
-      {/*<div >*/}
-      {/*  <div >*/}
-      {/*    <div >*/}
-      {/*      <h1 >My Watchlist</h1>*/}
-
-      {/*      <span >*/}
-      {/*      {state.length} {state.length === 1 ? "Movie" : "Movies"}*/}
-      {/*    </span>*/}
-      {/*    </div>*/}
-
-      {/*    {state.length > 0 ? (*/}
-      {/*      <div >*/}
-      {/*        { <FilmCard  film={`${like.find(item => item.movie)} `} />*/}
-      {/*        }*/}
-      {/*      </div>*/}
-      {/*    ) : (*/}
-      {/*      <h2 >No movies in your list! Add some!</h2>*/}
-      {/*    )}*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-
+        </div>
+        {likeMovie.length > 0 ? (
+          <Grid container spacing={2}>
+              {likeMovie.map(film => (
+              <Grid item xs={3} key={film.id} >
+                <FilmCard film={film}/>
+              </Grid>
+              ))}
+          </Grid> ) : (
+          <h2 >No movies in your list! Add some!</h2>
+        )}
+      </div>
     </div>
 
+);
 
-  );
 };
 
 export default FilmList;

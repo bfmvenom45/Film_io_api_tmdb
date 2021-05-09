@@ -3,9 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from 'src/components/Context/GlobalContext';
-import { HeartIcon } from 'src/Icons';
+import { FireIcon, HeartIcon } from 'src/Icons';
 import getGenreName from 'src/services/genresService';
-
+import getItemId from 'src/services/testService';
+import useLocalStorage from '../../hook/useLocalStorege';
 
 const useStyles = makeStyles((theme) => ({
 	avatar: {
@@ -34,24 +35,32 @@ const FilmCard = ({ film }) => {
 	const classes = useStyles();
 	const {
 		addMovieToLike,
-		removeMovieFromLike,
+		removeMovieFromLike
 	} = useContext(GlobalContext);
 
 
+	// console.log('NAme1:', `/app/film/${getItemId('id')}`)
+
 	return (
 		<Card item xs={12} sm={3} className={classes.card}>
-			<Button  startIcon={<HeartIcon />}
-			         onClick={() => addMovieToLike({
-				         type: 'like',
-				         movie: film.id,
-			         })}
+			<Button startIcon={<HeartIcon />}
+			        onClick={() => addMovieToLike({
+				        type: 'like',
+				        movie: film,
+			        })}
 			> </Button>
-			<CardActionArea style={{ height: '100%' }} component={Link} to={`/app/film/${film.id}`} >
+			{/*<Button startIcon={<FireIcon />}*/}
+			{/*        onClick={() => removeMovieFromLike({*/}
+			{/*	        type: 'like',*/}
+			{/*	        movie: film,*/}
+			{/*        })}*/}
+			{/*> </Button>*/}
+			<CardActionArea style={{ height: '100%' }} component={Link} to={`/app/film/${film.id}`}>
 				<CardContent>
 					<Avatar src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} className={classes.avatar} />
 					<Typography variant={'subtitle1'} align={'center'}>{film.title}</Typography>
-					{/*<Typography variant={'caption'} color={'textSecondary'} align={'center'}*/}
-					{/*            noWrap>{film.genre_ids.map(id => getGenreName(id)).join(', ')}</Typography>*/}
+					<Typography variant={'caption'} color={'textSecondary'} align={'center'}
+					            noWrap>{film.genre_ids.map(id => getGenreName(id)).join(', ')}</Typography>
 				</CardContent>
 			</CardActionArea>
 		</Card>

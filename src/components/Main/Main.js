@@ -8,6 +8,7 @@ import Home from "src/pages/Home";
 import Popular from "src/pages/Popular";
 import FilmPage from "src/pages/FilmPage";
 import SearchBar from 'src/pages/SearchBar';
+import getItemId from 'src/services/testService';
 
 const Main = () => {
     return (
@@ -28,12 +29,11 @@ const Main = () => {
             <SearchBar/>
           </Container>
           </Route>
-          <Route path='/app/list/'  >
+          <Route path='/app/list/'   >
             <Container maxWidth='lg'>
-              <FilmList component={FilmPage} />
+              <FilmList component={FilmPage}/>
             </Container>
           </Route>
-
             <Redirect to={'/app/home'}/>
 
         </Switch>

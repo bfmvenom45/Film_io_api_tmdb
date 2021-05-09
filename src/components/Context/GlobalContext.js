@@ -1,5 +1,7 @@
+// noinspection JSCheckFunctionSignatures
 import React, { createContext, useReducer, useEffect } from "react";
 import AppReducer from "./AppReducer";
+
 // initial state
 const initialState = {
 	like: localStorage.getItem("like")
@@ -29,9 +31,7 @@ export const GlobalProvider = (props) => {
 
 
 
-	const moveToLike = (movie) => {
-		dispatch({ type: "MOVE_TO_LIKE", payload: movie });
-	};
+
 
 
 
@@ -40,8 +40,7 @@ export const GlobalProvider = (props) => {
 			value={{
 				like: state.like,
 				addMovieToLike,
-				removeMovieFromLike,
-				moveToLike,
+				removeMovieFromLike
 			}}
 		>
 			{props.children}

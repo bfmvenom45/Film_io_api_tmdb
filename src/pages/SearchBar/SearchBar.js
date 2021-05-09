@@ -82,9 +82,9 @@ const SearchBar = () => {
 			</Box>
 			{loading ? loadingComponent : !search ? enterSearch : responce.length > 0 ? (
 				<Grid container spacing={2}>
-					{responce.map(film => (
-						<Grid item xs={3} key={film.id}>
-							<FilmCard film={film} />
+					{responce.map(films => (
+						<Grid item xs={3} key={films.id}>
+							<FilmCard film={films} />
 						</Grid>
 					))}
 				</Grid>
