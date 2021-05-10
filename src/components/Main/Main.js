@@ -1,41 +1,46 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
-import {Switch, Route, Redirect} from "react-router-dom";
-import FilmList from 'src/components/FilmList';
-import Home from "src/pages/Home";
-import Popular from "src/pages/Popular";
-import FilmPage from "src/pages/FilmPage";
+import { Switch, Route, Redirect } from 'react-router-dom';
+import FilmList from 'src/pages/FilmList';
+import FilmPage from 'src/pages/FilmPage';
+import Home from 'src/pages/Home';
+import Popular from 'src/pages/Popular';
 import SearchBar from 'src/pages/SearchBar';
 
-const Main = () => {
-    return (
-        <Switch>
-            <Route path='/app/home'>
-              <Container maxWidth='lg'>
-                <Home/>
-              </Container>
-            </Route>
-          <Route path='/app/popular' >
-            <Container maxWidth='lg'>
-              <Popular/>
-            </Container>
-          </Route>
-            <Route path='/app/film/:id' component={FilmPage}/>
-          <Route path='/app/search/' >
-            <Container maxWidth='lg'>
-            <SearchBar/>
-          </Container>
-          </Route>
-          <Route path='/app/list/' >
-            <Container maxWidth='lg'>
-              <FilmList/>
-            </Container>
-          </Route>
+const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
+	return (
+		<Switch>
+			<Route path="/app/home">
+				<Container maxWidth="lg">
+					<Home favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+				</Container>
+			</Route>
+			<Route path="/app/popular">
+				<Container maxWidth="lg">
+					<Popular favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+				</Container>
+			</Route>
+			<Route path="/app/film/:id" component={FilmPage}/>
+			<Route path="/app/search/">
+				<Container maxWidth="lg">
+					<SearchBar favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+				</Container>
+			</Route>
+			<Route path="/app/list/" >
+				<Container maxWidth="lg">
+					<FilmList favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+				</Container>
+			</Route>
+			<Route>
+				<Container>
+					<FilmPage favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler}/>
+				</Container>
+			</Route>
 
-            <Redirect to={'/app/home'}/>
+			<Redirect to={'/app/home'} />
 
-        </Switch>
-    );
+		</Switch>
+	);
 };
 
 export default Main;

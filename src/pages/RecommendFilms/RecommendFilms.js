@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import FilmCard from 'src/components/FilmCard';
 
 
-const RecommendFilms = () => {
+const RecommendFilms = ({setFavourites, favourites, addToFavouritHandler}) => {
 
   const params = useParams();
   const [recommend, setRecommend] = useState({});
@@ -41,7 +41,7 @@ const RecommendFilms = () => {
         <Grid container spacing={2}>
           {recommend.map(film => (
             <Grid item xs={3} key={film.id}  >
-             <FilmCard film={film}/>
+             <FilmCard film={film} addToFavouritHandler={addToFavouritHandler} favourites={favourites} setFavourites={setFavourites}/>
             </Grid>
           ))}
         </Grid>

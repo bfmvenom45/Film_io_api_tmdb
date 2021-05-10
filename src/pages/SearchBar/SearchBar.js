@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SearchBar = () => {
+const SearchBar = ({setFavourites, favourites, addToFavouritHandler}) => {
 	const classes = useStyles();
 
 	const [loading, setLoading] = useState(false);
@@ -34,7 +34,6 @@ const SearchBar = () => {
 					setLoading(false);
 				});
 		}
-
 		if (search) {
 			fetchSearch();
 		}
@@ -73,7 +72,7 @@ const SearchBar = () => {
 							label={'Поиск по названию фильма'}
 							fullWidth
 							variant={'filled'}
-							placeholder="Search"
+							placeholder="Поиск..."
 							value={search}
 							onChange={searchHandler}
 						/>
@@ -84,7 +83,7 @@ const SearchBar = () => {
 				<Grid container spacing={2}>
 					{responce.map(film => (
 						<Grid item xs={3} key={film.id}>
-							<FilmCard film={film} />
+							<FilmCard film={film} addToFavouritHandler={addToFavouritHandler} setFavourites={setFavourites} favourites={favourites}/>
 						</Grid>
 					))}
 				</Grid>

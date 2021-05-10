@@ -1,6 +1,7 @@
 import {
 	Avatar, Button, Card, CardActionArea, CardContent, CardMedia, Chip, CircularProgress, Grid, Typography,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Pagination } from '@material-ui/lab';
@@ -8,10 +9,18 @@ import { findIndex } from 'lodash';
 import FilmCard from 'src/components/FilmCard';
 import  getGenreName from 'src/services/genresService';
 // import FetchService from 'src/services/fetchService';
+const useStyles = makeStyles((theme) => ({
+	pagination: {
+		marginTop: 20,
+		position: 'absolute'
 
 
-const Popular = () => {
-	const [films, setFilms] = useState([]);
+	},
+}));
+
+const Popular = ({setFavourites, favourites, addToFavouritHandler}) => {
+	const classes = useStyles();
+	const [films, setFilms] = useState({});
 	const [hasError, setErrors] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [page, setPage] = useState(1);
@@ -39,7 +48,7 @@ const Popular = () => {
 	}, [page]);
 
 
-console.log('GENRE',  getGenreName(16));
+// console.log('GENRE',  getGenreName(16));
 
 
 	const pageHandler = (e, newPage) => {
@@ -52,14 +61,14 @@ console.log('GENRE',  getGenreName(16));
 				<Grid container spacing={2}>
 					{films.map(film => (
 						<Grid item xs={3} key={film.id} >
-							<FilmCard film={film}/>
+							<FilmCard film={film} setFavourites={setFavourites} favourites={favourites} addToFavouritHandler={addToFavouritHandler}/>
 						</Grid>
 					))}
 				</Grid>
 			)}
-			<div>
+			<div >
 				{ responce && !loading &&
-				(	<Pagination
+				(	<Pagination className={classes.pagination}
 					page={responce.page}
 					count={responce.total_pages}
 					size="large"

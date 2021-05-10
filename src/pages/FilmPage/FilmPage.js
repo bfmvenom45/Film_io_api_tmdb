@@ -7,10 +7,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CalendarIcon, ClockIcon, CursorClickIcon, FireIcon, TagIcon } from 'src/Icons';
 import RecommendFilms from 'src/pages/RecommendFilms';
-import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
-import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
-import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined';
-import MouseOutlinedIcon from '@material-ui/icons/MouseOutlined';
 import noise from './noise.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -89,11 +85,14 @@ const useStyles = makeStyles((theme) => ({
 		position: 'relative',
 	}
 }));
-const FilmPage = () => {
+const FilmPage = ({setFavourites, favourites, addToFavouritHandler}) => {
+
 	const classes = useStyles();
 	const params = useParams();
 	const [details, setDetails] = useState({});
 	const [loading, setLoading] = useState(true);
+
+
 	useEffect(() => {
 		fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=b96993fb25220304f950b534ddafb551&language=ru-RU`)
 			.then((res) => {
@@ -103,7 +102,8 @@ const FilmPage = () => {
 				setDetails(data);
 				setLoading(false);
 			});
-	}, [params]);
+	}, [params,  ]
+	);
 
 
 	console.log(details);
@@ -118,12 +118,12 @@ const FilmPage = () => {
 							<div className={classes.backdrop2} />
 							<Container maxWidth={'lg'} className={classes.container}>
 								<Grid container spacing={5}>
-									<Grid item xs={3} className={classes.left}>
+									<Grid item  xs={12} sm={3} className={classes.left}>
 										<Box className={classes.boxBlur}>
 											<img className={classes.cover} src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`}
 											     style={{ maxWidth: '100%' }} />
 											<img  className={classes.blur} src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`}
-											     style={{ maxWidth: '100%' }} />
+											      style={{ maxWidth: '100%' }} />
 										</Box>
 									</Grid>
 									<Grid item xs={9} className={classes.rigth}>
@@ -183,7 +183,7 @@ const FilmPage = () => {
 									</Grid>
 								</Grid>
 								<Divider />
-								<RecommendFilms />
+								<RecommendFilms favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 							</Container>
 						</div>
 

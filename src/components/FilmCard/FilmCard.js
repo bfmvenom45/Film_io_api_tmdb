@@ -1,5 +1,6 @@
-import { Avatar, Card, CardActionArea, CardContent, Chip, Typography } from '@material-ui/core';
+import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, Chip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { findIndex } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import getGenreName from 'src/services/genresService';
@@ -28,10 +29,28 @@ const useStyles = makeStyles((theme) => ({
 	}
 
 	}));
-const FilmCard = ({film}) => {
+const FilmCard = ({ film, favourites, setFavourites, addToFavouritHandler}) => {
 	const classes = useStyles();
+
+
+	const index = findIndex(favourites, (o) => o.id  === film.id);
+
+	const removeFromFavourites = (film) => {
+		setFavourites(favourites.filter(item => item.id !== film.id))
+	};
 	return (
     <Card className={classes.card} >
+	    <CardActions>{
+		    index > -1
+			    ? (<Button variant='contained' fullWidth color='secondary'
+			               onClick={() => removeFromFavourites(film)}>Удалить</Button>)
+			    : (<Button variant='contained' fullWidth color='primary'
+			               onClick={() => addToFavouritHandler(film)}>Добавить</Button>)
+
+	    }
+
+
+	    </CardActions>
       <CardActionArea style={{height: '100%'}}  component={Link} to={`/app/film/${film.id}`} >
         <CardContent  >
           <Avatar  src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}  className={classes.avatar} />
@@ -39,6 +58,7 @@ const FilmCard = ({film}) => {
 	        <Typography variant={'caption'} color={'textSecondary'} align={'center'} noWrap>{film.genre_ids.map(id => getGenreName(id)).join(', ')}</Typography>
         </CardContent>
       </CardActionArea>
+
     </Card>
 	);
 };
