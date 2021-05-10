@@ -1,7 +1,6 @@
 // noinspection JSCheckFunctionSignatures
 import React, { createContext, useReducer, useEffect } from "react";
 import AppReducer from "./AppReducer";
-
 // initial state
 const initialState = {
 	like: localStorage.getItem("like")
@@ -26,7 +25,7 @@ export const GlobalProvider = (props) => {
 	};
 
 	const removeMovieFromLike = (id) => {
-		dispatch({ type: "REMOVE_MOVIE_FROM_LIKE", payload: id });
+		dispatch({ type: 'REMOVE_MOVIE_FROM_LIKE', payload: id });
 	};
 
 

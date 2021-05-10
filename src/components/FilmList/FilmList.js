@@ -5,6 +5,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { findIndex } from 'lodash';
 import React, { useContext,  useState } from 'react';
 import { GlobalContext } from 'src/components/Context/GlobalContext';
 import FilmCard from 'src/components/FilmCard';
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FilmList = () => {
   const {like} = useContext(GlobalContext);
-
+  // const [object, setObject] = useState(like);
   const classes = useStyles();
 
   const {
@@ -46,11 +47,23 @@ const FilmList = () => {
     removeMovieFromLike,
   } = useContext(GlobalContext);
 
+
   console.log("USE", like);
+
 
   const likeMovie = like.map(id => id.movie);
 
-  // console.log("LIKEMOVIE", likeMovie);
+  // const getItemIdx = (id) => {
+  //   const index = findIndex(like, function(obj) {
+  //     return obj.type === id;
+  //   })
+  //   if (index !== -1) {
+  //     return like[index]["movie"];
+  //   }
+  // }
+  // console.log("FIND", getItemIdx(399566));
+
+  console.log("LIKEMOVIE", likeMovie);
   return (
     <div     >
       <div >

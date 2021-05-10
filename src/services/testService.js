@@ -49,7 +49,7 @@ const object = [
         }
     },
     {
-        "type": "like",
+        "type": 399566,
         "movie": {
             "adult": false,
             "backdrop_path": "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
@@ -72,27 +72,27 @@ const object = [
         }
     }
 ];
-function  getItemId(movie) {
-	const index = findIndex(object,  function(obj) {
-		return obj.type === movie;
-	})
-	if (index !== -1) {
-		return object[index]["movie"];
-	}
-}
+// function  getItemId(movie) {
+// 	const index = findIndex(object,  function(obj) {
+// 		return obj.type === movie;
+// 	})
+// 	if (index !== -1) {
+// 		return object[index]["movie"];
+// 	}
+// }
 
 // const getItemId = object.find(item => item.movie)
 
 //   if (item.type === 'like') {
 //     return item.movie
 //   }
-// function getItemId(type) {
-// 	const index = findIndex(object, function(obj) {
-// 		return obj.type === type;
-// 	})
-// 	if (index !== -1) {
-// 		return object[index]["name"];
-// 	}
-// }
-// console.log('LION:', getItemId('like'))
+function getItemId(id) {
+	const index = findIndex(object, function(obj) {
+		return obj.type === id;
+	})
+	if (index !== -1) {
+		return object[index]["movie"];
+	}
+}
+console.log('LION:', getItemId(399566))
 export default getItemId;

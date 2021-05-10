@@ -1,12 +1,13 @@
 import { Avatar, Button, Card, CardActionArea, CardContent, Chip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useContext } from 'react';
+import { findIndex } from 'lodash';
+import React, { createContext, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useLocalStorage from 'react-use-localstorage';
 import { GlobalContext } from 'src/components/Context/GlobalContext';
 import { FireIcon, HeartIcon } from 'src/Icons';
 import getGenreName from 'src/services/genresService';
 import getItemId from 'src/services/testService';
-import useLocalStorage from '../../hook/useLocalStorege';
 
 const useStyles = makeStyles((theme) => ({
 	avatar: {
@@ -34,27 +35,34 @@ const useStyles = makeStyles((theme) => ({
 const FilmCard = ({ film }) => {
 	const classes = useStyles();
 	const {
+		like,
 		addMovieToLike,
 		removeMovieFromLike
 	} = useContext(GlobalContext);
+	const [localState, setLocalState] = useLocalStorage('id', {});
 
+	function getItemIdx(id){
+		const index = findIndex(like, function(obj) {
+			return obj.type === id;
+		})
+		if (index !== -1) {
+			return like[index]["movie"];
+		}
+	}
+	const favoriteButtonHandler = (type, movie) => {
+		addMovieToLike(type.target.map(id => getItemIdx(id)))
+	}
 
 	// console.log('NAme1:', `/app/film/${getItemId('id')}`)
 
 	return (
 		<Card item xs={12} sm={3} className={classes.card}>
 			<Button startIcon={<HeartIcon />}
-			        onClick={() => addMovieToLike({
-				        type: 'like',
-				        movie: film,
-			        })}
+			        onClick={(e) => setLocalState(e.target.film)}
 			> </Button>
-			{/*<Button startIcon={<FireIcon />}*/}
-			{/*        onClick={() => removeMovieFromLike({*/}
-			{/*	        type: 'like',*/}
-			{/*	        movie: film,*/}
-			{/*        })}*/}
-			{/*> </Button>*/}
+			<Button startIcon={<FireIcon />}
+			        onClick={() => removeMovieFromLike(film)}
+			> </Button>
 			<CardActionArea style={{ height: '100%' }} component={Link} to={`/app/film/${film.id}`}>
 				<CardContent>
 					<Avatar src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} className={classes.avatar} />
@@ -65,5 +73,7 @@ const FilmCard = ({ film }) => {
 			</CardActionArea>
 		</Card>
 	);
+
 };
 export default FilmCard;
+
