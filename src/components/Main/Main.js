@@ -1,14 +1,11 @@
 import { Container } from '@material-ui/core';
-import { idID } from '@material-ui/core/locale';
-import React, { useContext } from 'react';
-import { Switch, Route, Redirect, useParams } from 'react-router-dom';
-import FilmCard from 'src/components/FilmCard';
+import React from 'react';
+import {Switch, Route, Redirect} from "react-router-dom";
 import FilmList from 'src/components/FilmList';
 import Home from "src/pages/Home";
 import Popular from "src/pages/Popular";
 import FilmPage from "src/pages/FilmPage";
 import SearchBar from 'src/pages/SearchBar';
-import getItemId from 'src/services/testService';
 
 const Main = () => {
     return (
@@ -29,11 +26,12 @@ const Main = () => {
             <SearchBar/>
           </Container>
           </Route>
-          <Route path='/app/list/'   >
+          <Route path='/app/list/' >
             <Container maxWidth='lg'>
-              <FilmList component={FilmPage}/>
+              <FilmList/>
             </Container>
           </Route>
+
             <Redirect to={'/app/home'}/>
 
         </Switch>

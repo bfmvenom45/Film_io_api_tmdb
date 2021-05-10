@@ -73,7 +73,7 @@ const SearchBar = () => {
 							label={'Поиск по названию фильма'}
 							fullWidth
 							variant={'filled'}
-							placeholder="Поиск..."
+							placeholder="Search"
 							value={search}
 							onChange={searchHandler}
 						/>
@@ -82,9 +82,9 @@ const SearchBar = () => {
 			</Box>
 			{loading ? loadingComponent : !search ? enterSearch : responce.length > 0 ? (
 				<Grid container spacing={2}>
-					{responce.map(films => (
-						<Grid item xs={3} key={films.id}>
-							<FilmCard film={films} />
+					{responce.map(film => (
+						<Grid item xs={3} key={film.id}>
+							<FilmCard film={film} />
 						</Grid>
 					))}
 				</Grid>

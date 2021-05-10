@@ -86,5 +86,4 @@ function getGenreName(id) {
 		return genres[index]["name"];
 	}
 }
-
 export default getGenreName;

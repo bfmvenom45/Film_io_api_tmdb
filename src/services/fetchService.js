@@ -1,4 +1,4 @@
-export default class fetchService {
+export default class FetchService {
     _apiKey = 'b96993fb25220304f950b534ddafb551&language=en-US&page=1';
     _apiBase = 'https://api.themoviedb.org/3/';
 
