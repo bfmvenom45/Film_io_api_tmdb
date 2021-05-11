@@ -1,16 +1,11 @@
-import {
-	Avatar, Button, Card, CardActionArea, CardContent, CardMedia, Chip, CircularProgress, Grid, Typography,
-} from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { CircularProgress, Grid } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import { findIndex } from 'lodash';
+import React, { useEffect, useState } from 'react';
 import FilmCard from 'src/components/FilmCard';
-import  getGenreName from 'src/services/genresService';
 // import FetchService from 'src/services/fetchService';
 
 
-const Popular = () => {
+const Popular = ({setFavourites, addToFavoritHandler, favourites}) => {
 	const [films, setFilms] = useState([]);
 	const [hasError, setErrors] = useState(false);
 	const [loading, setLoading] = useState(true);
@@ -39,7 +34,6 @@ const Popular = () => {
 	}, [page]);
 
 
-console.log('GENRE',  getGenreName(16));
 
 
 	const pageHandler = (e, newPage) => {
@@ -52,7 +46,7 @@ console.log('GENRE',  getGenreName(16));
 				<Grid container spacing={2}>
 					{films.map(film => (
 						<Grid item xs={3} key={film.id} >
-							<FilmCard film={film}/>
+							<FilmCard film={film} setFavourites={setFavourites} favourites={favourites} addToFavoritHandler={addToFavoritHandler}/>
 						</Grid>
 					))}
 				</Grid>

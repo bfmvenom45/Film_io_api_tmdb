@@ -1,16 +1,10 @@
-import {
-	Box, Button, Chip, Container, Divider, Grid, Link, ListItem, ListItemIcon, ListItemText, Typography,
-} from '@material-ui/core';
+import { Box, Button, Container, Divider, Grid, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { Rating } from '@material-ui/lab';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CalendarIcon, ClockIcon, CursorClickIcon, FireIcon, TagIcon } from 'src/Icons';
 import RecommendFilms from 'src/pages/RecommendFilms';
-import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
-import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
-import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined';
-import MouseOutlinedIcon from '@material-ui/icons/MouseOutlined';
 import noise from './noise.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -89,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 		position: 'relative',
 	}
 }));
-const FilmPage = () => {
+const FilmPage = ({favourites, addToFavoritHandler, setFavourites}) => {
 	const classes = useStyles();
 	const params = useParams();
 	const [details, setDetails] = useState({});
@@ -106,7 +100,6 @@ const FilmPage = () => {
 	}, [params]);
 
 
-	console.log(details);
 	return (
 		<div>
 			{
@@ -183,7 +176,7 @@ const FilmPage = () => {
 									</Grid>
 								</Grid>
 								<Divider />
-								<RecommendFilms />
+								<RecommendFilms favourites={favourites} setFavourites={setFavourites} addToFavoritHandler={addToFavoritHandler} />
 							</Container>
 						</div>
 

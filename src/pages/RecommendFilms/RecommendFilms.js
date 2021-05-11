@@ -1,11 +1,10 @@
 import { Box, CircularProgress, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import FilmCard from 'src/components/FilmCard';
 
 
-const RecommendFilms = () => {
+const RecommendFilms = ({addToFavoritHandler, favourites, setFavourites}) => {
 
   const params = useParams();
   const [recommend, setRecommend] = useState({});
@@ -41,7 +40,7 @@ const RecommendFilms = () => {
         <Grid container spacing={2}>
           {recommend.map(film => (
             <Grid item xs={3} key={film.id}  >
-             <FilmCard film={film}/>
+             <FilmCard film={film} favourites={favourites} setFavourites={setFavourites} addToFavoritHandler={addToFavoritHandler}/>
             </Grid>
           ))}
         </Grid>

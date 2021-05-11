@@ -1,4 +1,4 @@
-import { Card, CardContent, CircularProgress, Grid, TextField, Box, Typography } from '@material-ui/core';
+import { Box, Card, CardContent, CircularProgress, Grid, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import FilmCard from 'src/components/FilmCard';
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SearchBar = () => {
+const SearchBar = ({addToFavoritHandler, favourites, setFavourites}) => {
 	const classes = useStyles();
 
 	const [loading, setLoading] = useState(false);
@@ -84,7 +84,7 @@ const SearchBar = () => {
 				<Grid container spacing={2}>
 					{responce.map(film => (
 						<Grid item xs={3} key={film.id}>
-							<FilmCard film={film} />
+							<FilmCard film={film} favourites={favourites} setFavourites={setFavourites} addToFavoritHandler={addToFavoritHandler} />
 						</Grid>
 					))}
 				</Grid>
