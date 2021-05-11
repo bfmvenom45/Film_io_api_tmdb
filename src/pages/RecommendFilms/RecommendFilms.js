@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import {  useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FilmCard from 'src/components/FilmCard';
 
 
