@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
 		position: 'relative'
 	},
 	toolBar: {
-
+		display:'flex',
+		alignItems: 'center',
 	}
 
 }));
