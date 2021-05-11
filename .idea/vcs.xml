@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app-tmdb-test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app-tmdb-test/film-io" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/film.io" vcs="Git" />
   </component>
 </project>
