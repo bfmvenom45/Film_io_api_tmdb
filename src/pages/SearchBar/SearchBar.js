@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SearchBar = ({ setFavourites, favourites, addToFavouritHandler }) => {
+const SearchBar = ({setFavourites, favourites, addToFavouritHandler}) => {
 	const classes = useStyles();
 
 	const [loading, setLoading] = useState(false);
@@ -34,7 +34,6 @@ const SearchBar = ({ setFavourites, favourites, addToFavouritHandler }) => {
 					setLoading(false);
 				});
 		}
-
 		if (search) {
 			fetchSearch();
 		}
@@ -50,17 +49,17 @@ const SearchBar = ({ setFavourites, favourites, addToFavouritHandler }) => {
 		</CardContent>
 	</Card>;
 	const enterSearch = <Card
-		className={classes.loadingContainer}>
-		<CardContent>
-			<Typography variant={'h6'}>Введите название для поиска</Typography>
-		</CardContent>
-	</Card>;
-	const nothingFound = <Card
-		className={classes.loadingContainer}>
-		<CardContent>
-			<Typography variant={'h6'}>Ничего не найдено</Typography>
-		</CardContent>
-	</Card>;
+    className={classes.loadingContainer}>
+    <CardContent>
+      <Typography variant={'h6'}>Введите название для поиска</Typography>
+    </CardContent>
+  </Card>;
+	const nothingFound =<Card
+    className={classes.loadingContainer}>
+    <CardContent>
+      <Typography variant={'h6'}>Ничего не найдено</Typography>
+    </CardContent>
+  </Card>;
 
 
 	return (
@@ -84,8 +83,7 @@ const SearchBar = ({ setFavourites, favourites, addToFavouritHandler }) => {
 				<Grid container spacing={2}>
 					{responce.map(film => (
 						<Grid item xs={3} key={film.id}>
-							<FilmCard film={film} addToFavouritHandler={addToFavouritHandler} setFavourites={setFavourites}
-							          favourites={favourites} />
+							<FilmCard film={film} addToFavouritHandler={addToFavouritHandler} setFavourites={setFavourites} favourites={favourites}/>
 						</Grid>
 					))}
 				</Grid>

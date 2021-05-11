@@ -1,21 +1,24 @@
 import {
-	Box,
-	CircularProgress, Grid,
+	Avatar, Button, Card, CardActionArea, CardContent, CardMedia, Chip, CircularProgress, Grid, Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { Pagination } from '@material-ui/lab';
+import { findIndex } from 'lodash';
 import FilmCard from 'src/components/FilmCard';
+import  getGenreName from 'src/services/genresService';
+// import FetchService from 'src/services/fetchService';
 const useStyles = makeStyles((theme) => ({
 	pagination: {
 		marginTop: 20,
-		display: 'flex',
-		justifyContent: 'center',
-		marginBottom: 20,
+		position: 'absolute'
+
+
 	},
 }));
 
-const Popular = ({ setFavourites, favourites, addToFavouritHandler }) => {
+const Popular = ({setFavourites, favourites, addToFavouritHandler}) => {
 	const classes = useStyles();
 	const [films, setFilms] = useState({});
 	const [hasError, setErrors] = useState(false);
@@ -49,32 +52,31 @@ const Popular = ({ setFavourites, favourites, addToFavouritHandler }) => {
 
 
 	const pageHandler = (e, newPage) => {
-		setPage(newPage);
-	};
+		setPage(newPage)
+	}
 
 	return (
-		<Box my>
+		<div>
 			{loading ? <CircularProgress /> : (
 				<Grid container spacing={2}>
 					{films.map(film => (
-						<Grid item xs={3} key={film.id}>
-							<FilmCard film={film} setFavourites={setFavourites} favourites={favourites}
-							          addToFavouritHandler={addToFavouritHandler} />
+						<Grid item xs={3} key={film.id} >
+							<FilmCard film={film} setFavourites={setFavourites} favourites={favourites} addToFavouritHandler={addToFavouritHandler}/>
 						</Grid>
 					))}
 				</Grid>
 			)}
-			<Box className={classes.pagination} >
-				{responce && !loading &&
-				(<Pagination
-				             page={responce.page}
-				             count={responce.total_pages}
-				             size="large"
-				             onChange={pageHandler}
-				/>)
+			<div >
+				{ responce && !loading &&
+				(	<Pagination className={classes.pagination}
+					page={responce.page}
+					count={responce.total_pages}
+					size="large"
+					onChange={pageHandler}
+				/> )
 				}
-			</Box>
-		</Box>
+			</div>
+		</div>
 	);
 };
 
