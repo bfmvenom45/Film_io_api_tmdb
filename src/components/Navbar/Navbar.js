@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Box, Button, Container, Grid } from '@material-ui/core';
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,13 +14,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-	appBar: {
-		position: 'relative'
-	},
-	toolBar: {
-		display:'flex',
-		alignItems: 'center',
-	}
 
 }));
 
@@ -108,19 +101,20 @@ export default function Navbar({favourites}) {
 	// console.log('favourites', favourites );
 	return (
 		<div>
-			<AppBar position="relative" color={'outline'} className={classes.appBar}>
-				<Toolbar variant={'regular'} className={classes.toolBar}>
-
-					<div>
-						<Typography variant="h6" noWrap>
+			<AppBar position={'relative'}  color={'outline'} className={classes.appBar}>
+				<Toolbar  className={classes.toolBar}>
+					<div >
+						<Typography variant="h6" noWrap >
 							Film.io
 						</Typography>
 					</div>
-					<div>
-						<Button  component={Link} to="/app/popular" color={'primary'} variant={'contained'}>Популярные</Button>
-						<Button component={Link} to="/app/list" color={'primary'} variant={'contained'}>Избранные</Button>
-						<Button component={Link} to="/app/search" color={'primary'} variant={'contained'}>Поиск</Button>
-					</div>
+					<Container    >
+						<Grid container  justify={'space-evenly'} >
+								<Button  component={Link} to="/app/popular" color={'primary'} variant={'contained'}>Популярные</Button>
+								<Button component={Link} to="/app/list" color={'primary'} variant={'contained'}>Избранные</Button>
+								<Button component={Link} to="/app/search" color={'primary'} variant={'contained'}>Поиск</Button>
+						</Grid>
+					</Container>
 
 
 				</Toolbar>

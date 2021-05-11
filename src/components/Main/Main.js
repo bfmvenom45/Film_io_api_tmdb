@@ -20,24 +20,25 @@ const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
 					<Popular favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 				</Container>
 			</Route>
-			<Route path="/app/film/:id" component={FilmPage}/>
+			<Route path="/app/film/:id" component={FilmPage} />
 			<Route path="/app/search/">
 				<Container maxWidth="lg">
-					<SearchBar favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+					<SearchBar favourites={favourites} setFavourites={setFavourites}
+					           addToFavouritHandler={addToFavouritHandler} />
 				</Container>
 			</Route>
-			<Route path="/app/list/" >
+			<Route path="/app/list/">
 				<Container maxWidth="lg">
 					<FilmList favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 				</Container>
 			</Route>
 			<Route>
 				<Container>
-					<FilmPage favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler}/>
+					<FilmPage favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 				</Container>
 			</Route>
 
-			<Redirect to={'/app/home'} />
+			<Redirect to={'/app/home/'}/>
 
 		</Switch>
 	);
