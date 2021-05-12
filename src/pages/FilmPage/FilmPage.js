@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 	overview: {
 		color: '#475569',
 	},
-	blur:{
+	blur: {
 		position: 'absolute',
 		filter: 'blur(50px)',
 		left: 10,
@@ -81,28 +81,28 @@ const useStyles = makeStyles((theme) => ({
 		opacity: 0.5,
 		zIndex: -1,
 	},
-	boxBlur:{
+	boxBlur: {
 		position: 'relative',
-	}
+	},
 }));
-const FilmPage = ({setFavourites, favourites, addToFavouritHandler}) => {
+const FilmPage = ({ setFavourites, favourites, addToFavouritHandler }) => {
 
 	const classes = useStyles();
 	const params = useParams();
-	const [details, setDetails] = useState({});
+	const [details, setDetails] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 
 	useEffect(() => {
-		fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=b96993fb25220304f950b534ddafb551&language=ru-RU`)
-			.then((res) => {
-				return res.json();
-			})
-			.then((data) => {
-				setDetails(data);
-				setLoading(false);
-			});
-	}, [params,  ]
+			fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=b96993fb25220304f950b534ddafb551&language=ru-RU`)
+				.then((res) => {
+					return res.json();
+				})
+				.then((data) => {
+					setDetails(data);
+					setLoading(false);
+				});
+		}, [params],
 	);
 
 
@@ -118,12 +118,12 @@ const FilmPage = ({setFavourites, favourites, addToFavouritHandler}) => {
 							<div className={classes.backdrop2} />
 							<Container maxWidth={'lg'} className={classes.container}>
 								<Grid container spacing={5}>
-									<Grid item  xs={12} sm={3} className={classes.left}>
+									<Grid item xs={12} sm={3} className={classes.left}>
 										<Box className={classes.boxBlur}>
 											<img className={classes.cover} src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`}
 											     style={{ maxWidth: '100%' }} />
-											<img  className={classes.blur} src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`}
-											      style={{ maxWidth: '100%' }} />
+											<img className={classes.blur} src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`}
+											     style={{ maxWidth: '100%' }} />
 										</Box>
 									</Grid>
 									<Grid item xs={9} className={classes.rigth}>
@@ -131,7 +131,7 @@ const FilmPage = ({setFavourites, favourites, addToFavouritHandler}) => {
 											{details.title}
 										</Typography>
 										<Box my={3}>
-											<Rating max={10} defaultValue={details.vote_average} icon={<FireIcon/>} name={'rating'} />
+											<Rating max={10} defaultValue={details.vote_average} icon={<FireIcon />} name={'rating'} />
 											<Typography>({details.vote_count} голосов)</Typography>
 											<Grid container spacing={2}>
 												<Grid item xs={'auto'}>
@@ -155,12 +155,13 @@ const FilmPage = ({setFavourites, favourites, addToFavouritHandler}) => {
 														<Box mr={1}>
 															<TagIcon className={classes.icon} />
 														</Box>
-														<ListItemText
-															primary={details && details?.genres.length > 0 && details.genres.map(id => id.name).join(', ')} />
+														<ListItemText favourites={favourites} setFavourites={setFavourites}
+														              addToFavouritHandler={addToFavouritHandler}
+														              primary={favourites && favourites?.genres.length > 0 && favourites.genres.map(id => id.name).join(', ')} />
 													</ListItem>
 												</Grid>
 												<Grid item xs={'auto'}>
-													<Button variant={'contained'}  startIcon={<CursorClickIcon />}
+													<Button variant={'contained'} startIcon={<CursorClickIcon />}
 													        href={details.homepage}>Официальный сайт</Button>
 												</Grid>
 											</Grid>
@@ -176,14 +177,15 @@ const FilmPage = ({setFavourites, favourites, addToFavouritHandler}) => {
 
 									</Grid>
 									<Grid item xs={9}>
-										<Typography  className={classes.title}>Описание</Typography>
+										<Typography className={classes.title}>Описание</Typography>
 										<Typography className={classes.overview} variant="subtitle1">
 											{details.overview}
 										</Typography>
 									</Grid>
 								</Grid>
 								<Divider />
-								<RecommendFilms favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+								<RecommendFilms favourites={favourites} setFavourites={setFavourites}
+								                addToFavouritHandler={addToFavouritHandler} />
 							</Container>
 						</div>
 
