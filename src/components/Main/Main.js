@@ -11,7 +11,7 @@ import SearchBar from 'src/pages/SearchBar';
 const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
 	return (
 		<Switch>
-			<Route path="/app/home">
+			<Route path="/app/home" component={FilmPage} favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler}>
 				<Container maxWidth="lg">
 					<Home favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 				</Container>
@@ -36,7 +36,7 @@ const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
 			</Route>
 
 
-			<Redirect to={'/app/home'} />
+			<Redirect to={'/app/home' } />
 
 		</Switch>
 	);

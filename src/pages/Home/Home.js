@@ -1,10 +1,10 @@
 import React from 'react';
 import Popular from 'src/pages/Popular';
 
-const Home = () => {
+const Home = ({favourites, setFavourites, addToFavouritHandler}) => {
     return (
         <div>
-            <Popular/>
+            <Popular favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler}/>
         </div>
     );
 };
