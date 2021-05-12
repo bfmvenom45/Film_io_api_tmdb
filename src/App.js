@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { findIndex } from 'lodash';
 import {Container, CssBaseline, MuiThemeProvider} from "@material-ui/core";
-import { getLocalFavourites, setLocalFavourites } from 'src/services/localStorageSrvice';
+import { getLocalFavourites, setLocalFavourites } from 'src/services/localStorageService';
 import {theme} from "src/theme/theme";
 import Navbar from "src/components/Navbar";
 import ErrorBoundary from "src/components/ErrorBoundaries";
