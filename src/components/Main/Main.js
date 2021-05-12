@@ -21,7 +21,7 @@ const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
 					<Popular favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 				</Container>
 			</Route>
-			<Route path='/app/film/:id'  >
+			<Route path='/app/film/:id'  component={FilmPage}>
 				<FilmPage favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 			</Route>
 			<Route path="/app/search/">
