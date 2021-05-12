@@ -5,6 +5,7 @@ import FilmList from 'src/pages/FilmList';
 import FilmPage from 'src/pages/FilmPage';
 import Home from 'src/pages/Home';
 import Popular from 'src/pages/Popular';
+import RecommendFilms from 'src/pages/RecommendFilms';
 import SearchBar from 'src/pages/SearchBar';
 
 const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
@@ -20,7 +21,9 @@ const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
 					<Popular favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 				</Container>
 			</Route>
-			<Route path="/app/film/:id" component={FilmPage}/>
+			<Route path='/app/film/:id'  >
+				<FilmPage favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+			</Route>
 			<Route path="/app/search/">
 				<Container maxWidth="lg">
 					<SearchBar favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
@@ -31,11 +34,7 @@ const Main = ({ favourites, setFavourites, addToFavouritHandler }) => {
 					<FilmList favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
 				</Container>
 			</Route>
-			<Route>
-				<Container>
-					<FilmPage favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler}/>
-				</Container>
-			</Route>
+
 
 			<Redirect to={'/app/home'} />
 

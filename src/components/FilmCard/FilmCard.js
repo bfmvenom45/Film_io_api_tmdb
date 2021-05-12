@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 const FilmCard = ({ film, favourites, setFavourites, addToFavouritHandler}) => {
 	const classes = useStyles();
 
-
 	const index = findIndex(favourites, (o) => o.id  === film.id);
 
 	const removeFromFavourites = (film) => {

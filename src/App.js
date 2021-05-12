@@ -30,7 +30,7 @@ function App() {
           <MuiThemeProvider theme={theme}>
             <ErrorBoundary>
               <CssBaseline/>
-              <Navbar favourites={favourites} />
+              <Navbar favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler}/>
 
               <Main favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler}/>
             </ErrorBoundary>

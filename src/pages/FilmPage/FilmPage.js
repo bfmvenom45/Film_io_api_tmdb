@@ -183,7 +183,8 @@ const FilmPage = ({setFavourites, favourites, addToFavouritHandler}) => {
 									</Grid>
 								</Grid>
 								<Divider />
-								<RecommendFilms favourites={favourites} setFavourites={setFavourites} addToFavouritHandler={addToFavouritHandler} />
+								<RecommendFilms favourites={favourites} setFavourites={setFavourites}
+								                addToFavouritHandler={addToFavouritHandler} />
 							</Container>
 						</div>
 
