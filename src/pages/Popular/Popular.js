@@ -1,5 +1,5 @@
 import {
-	Avatar, Button, Card, CardActionArea, CardContent, CardMedia, Chip, CircularProgress, Grid, Typography,
+	Avatar, Box, Button, Card, CardActionArea, CardContent, CardMedia, Chip, CircularProgress, Grid, Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
@@ -12,9 +12,9 @@ import  getGenreName from 'src/services/genresService';
 const useStyles = makeStyles((theme) => ({
 	pagination: {
 		marginTop: 20,
-		position: 'absolute'
-
-
+		display: 'flex',
+		justifyContent: 'center',
+		marginBottom: 20,
 	},
 }));
 
@@ -66,16 +66,16 @@ const Popular = ({setFavourites, favourites, addToFavouritHandler}) => {
 					))}
 				</Grid>
 			)}
-			<div >
+			<Box className={classes.pagination} >
 				{ responce && !loading &&
-				(	<Pagination className={classes.pagination}
+				(	<Pagination
 					page={responce.page}
 					count={responce.total_pages}
 					size="large"
 					onChange={pageHandler}
 				/> )
 				}
-			</div>
+			</Box>
 		</div>
 	);
 };
